@@ -5,6 +5,6 @@ public class KeyItem : Item
         base.ItemPower();
         gm.player.GotKey(true);
         gm.canvas.GotKey(false);
-        SendMessageToCanvas("WE GOT IT!");
+        SendMessageToCanvas("I GOT IT!");
     }
 }

@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public AudioClip gameLoopAudio;
     public AudioClip loseAudio;
     public AudioSource audio;
+    public MapContorller map;
     public int round;
     public float currTime;
     public float timeToFinish = 90;
@@ -25,8 +26,10 @@ public class GameManager : MonoBehaviour
             Instance = this;
         else if (Instance != this) // If there is already an instance and it's not `this` instance
             Destroy(gameObject); // Destroy the GameObject, this component is attached to
-
-        round = PlayerPrefs.GetInt("Round");
+        if (PlayerPrefs.GetInt("Round") < 1)
+            round = 1;
+        else
+            round = PlayerPrefs.GetInt("Round");
         audio = GetComponent<AudioSource>();
         Screen.orientation = ScreenOrientation.LandscapeLeft;
     }
@@ -104,6 +107,7 @@ public class GameManager : MonoBehaviour
         CancelInvoke("cameraResize");
         mainCamera.orthographicSize = 0.5f;
         StartMovement();
+        map.resetIcons();
     }
 
     public IEnumerator AudioFade(AudioSource audioSource, float FadeTime , bool fadeIn)

@@ -4,6 +4,6 @@ public class MagnifyingGlass : Item
     {
         base.ItemPower();
         gm.MagnifyingGLass(view * 1.5f);
-        SendMessageToCanvas("WE CAN SEE!");
+        SendMessageToCanvas("I CAN SEE!");
     }
 }

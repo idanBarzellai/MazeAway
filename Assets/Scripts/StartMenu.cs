@@ -98,8 +98,6 @@ public class StartMenu : MonoBehaviour
                 yield return null;
             }
 
-            
-            audioSource.volume = startVolume;
         }
         else
         {

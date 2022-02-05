@@ -10,6 +10,7 @@ TagManager:
   - edge_block
   - clock_item
   - coin_item
+  - music
   layers:
   - Default
   - TransparentFX

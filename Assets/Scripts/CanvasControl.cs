@@ -23,9 +23,9 @@ public class CanvasControl : MonoBehaviour
     public TMP_Text message;
     public TMP_Text itemMessage;
     public Image keyImg;
-    public AudioClip ticksAudio;
     public AudioClip tickTockAudio;
-    public AudioClip goAudio;
+    private AudioSource audio;
+    private AudioController threeTwoOneControl;
     public LevelLoad levelLoader;
 
     Color32 currColor;
@@ -34,9 +34,11 @@ public class CanvasControl : MonoBehaviour
 
     void Start()
     {
+        threeTwoOneControl = GameObject.FindGameObjectWithTag("music").GetComponent<AudioController>();
         currColor = timerPanel.GetComponentInChildren<Image>().color;
         gameManager = GameManager.Instance;
         timeToFinish = gameManager.timeToFinish;
+        audio = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -52,6 +54,7 @@ public class CanvasControl : MonoBehaviour
             {
                 if (!tenSecs)
                 {
+                    GetComponent<AudioSource>().clip = tickTockAudio;
                     GetComponent<AudioSource>().Play();
                     timerPanel.GetComponentInChildren<Image>().color = Color32.Lerp(currColor, new Color32(255, 0, 0, 100), 2f);
                     StartCoroutine(MessageOut("HURRY UP!"));
@@ -63,7 +66,7 @@ public class CanvasControl : MonoBehaviour
             }
             else
             {
-                GetComponent<AudioSource>().Stop();
+                GetComponent<AudioSource>().Pause();
                 timerText.text = (timer).ToString("F2");
             }
             counterText.text = "ROUND : " + gameManager.round;
@@ -132,39 +135,36 @@ public class CanvasControl : MonoBehaviour
     }
 
     public IEnumerator Countdown(int count)
-    {
-        if( count == 5)
+    {  
+        if ( count == 5)
         {
-            GetComponent<AudioSource>().Stop();
-
+            audio.Pause();
+            
             threeTwoOne.text = "YOU WON!";
             yield return new WaitForSecondsRealtime(1);
             count--;
-
         }
         if (count == 4)
         {
             threeTwoOne.text = "NEXT MAZE";
             yield return new WaitForSecondsRealtime(1);
             count--;
-            GetComponent<AudioSource>().clip = ticksAudio;
-        }
+        }        
         while (count > 0 && count < 4)
         {
-            
-            GetComponent<AudioSource>().Play();
+            if (count == 3)
+                threeTwoOneControl.PlayThreetwoOne();
+
             threeTwoOne.text = "" +count;
             yield return new WaitForSecondsRealtime(1);
             count--;
         }
         if (count == 0)
         {
-            GetComponent<AudioSource>().clip = goAudio;
-            GetComponent<AudioSource>().Play();
             threeTwoOne.text = "GO!";
             yield return new WaitForSecondsRealtime(1);
         }
-        GetComponent<AudioSource>().clip = tickTockAudio;
+        audio.clip = tickTockAudio;
         RetryGame();  
     }
 

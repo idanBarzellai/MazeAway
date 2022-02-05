@@ -8,6 +8,6 @@ public class CoinItem : Item
         int coins = PlayerPrefs.GetInt("Coins");
         coins++;
         PlayerPrefs.SetInt("Coins", coins);
-        SendMessageToCanvas("WE ARE RICH!");
+        SendMessageToCanvas("I AM RICH!");
     }
 }
