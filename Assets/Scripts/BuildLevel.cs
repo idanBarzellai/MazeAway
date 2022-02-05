@@ -133,22 +133,22 @@ public class BuildLevel : MonoBehaviour
             PickSpawnForItems(clockItem);
             PickSpawnForItems(clockItem);
             PickSpawnForItems(clockItem);
-            gm.timeToFinish = 90;
+            gm.SetTimeToFinish(90);
         }
-        else if (gm.round <= 5 && gm.round < 10)
+        else if (gm.round >= 5 && gm.round < 10)
         {
             PickSpawnForItems(magnifingGlass);
             PickSpawnForItems(magnifingGlass);
             PickSpawnForItems(clockItem);
             PickSpawnForItems(clockItem);
-            gm.timeToFinish = 60;
+            gm.SetTimeToFinish(60);
         }
         else 
         {
             PickSpawnForItems(magnifingGlass);
             PickSpawnForItems(clockItem);
             PickSpawnForItems(clockItem);
-            gm.timeToFinish = 40;
+            gm.SetTimeToFinish(40);
         }
         
     }

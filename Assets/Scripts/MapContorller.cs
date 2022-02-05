@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapContorller : MonoBehaviour
 {
     
     public GameObject[] blockIcons;
     public PlayerController player;
-
+    public GameObject dino; 
     private void Start()
     {
         foreach (GameObject blockIcon in blockIcons)
@@ -65,6 +66,8 @@ public class MapContorller : MonoBehaviour
         {
             int index = (y * 6) + x;
             blockIcons[index].SetActive(true);
+            Vector3 blockPos = blockIcons[index].transform.position;
+            dino.transform.position = blockPos;
         }
     }
 }

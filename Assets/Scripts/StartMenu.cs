@@ -9,6 +9,7 @@ public class StartMenu : MonoBehaviour
     // Control the Menu scene
     public GameObject soundToggle;
     public GameObject continueButton;
+    public TMP_Text record;
     public TMP_Text message;
     public LevelLoad levelLoader;
     private void Awake()
@@ -27,6 +28,7 @@ public class StartMenu : MonoBehaviour
 
     private void Start()
     {
+        record.text = "RECORD: " + PlayerPrefs.GetInt("Record");
         Screen.orientation = ScreenOrientation.LandscapeLeft;
     }
     public void StartButton()
@@ -104,7 +106,7 @@ public class StartMenu : MonoBehaviour
 
             float startVolume = 0.01f;
 
-            while (audioSource.volume < 0.1f)
+            while (audioSource.volume < 0.25f)
             {
                 audioSource.volume += startVolume * Time.deltaTime / FadeTime;
                 yield return null;

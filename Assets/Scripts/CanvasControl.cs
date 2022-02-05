@@ -37,7 +37,7 @@ public class CanvasControl : MonoBehaviour
         threeTwoOneControl = GameObject.FindGameObjectWithTag("music").GetComponent<AudioController>();
         currColor = timerPanel.GetComponentInChildren<Image>().color;
         gameManager = GameManager.Instance;
-        timeToFinish = gameManager.timeToFinish;
+        timeToFinish = gameManager.GetTimeToFinish();
         audio = GetComponent<AudioSource>();
     }
 
@@ -193,6 +193,7 @@ public class CanvasControl : MonoBehaviour
     public void RetryGame()
     {  
         gameManager.RetryGame();
+        timeToFinish = gameManager.GetTimeToFinish();
         if (Time.timeScale == 0)
             PauseGame();
     }

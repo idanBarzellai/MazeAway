@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public MapContorller map;
     public int round;
     public float currTime;
-    public float timeToFinish = 90;
+    private float timeToFinish;
     float magnifing;
 
     public static GameManager Instance; // A static reference to the GameManager instance
@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
             round = PlayerPrefs.GetInt("Round");
         audio = GetComponent<AudioSource>();
         Screen.orientation = ScreenOrientation.LandscapeLeft;
+        timeToFinish = 90;
     }
 
     void Start()
@@ -100,6 +101,8 @@ public class GameManager : MonoBehaviour
     public void RetryGame()
     {
         // Reset all gameobjects as the start of a new level
+        if (PlayerPrefs.GetInt("Record") < round)
+            PlayerPrefs.SetInt("Record", round);
         currTime = Time.time;
         levelBuilder.ResetAllLevel();
         canvas.ResetCanvas();
@@ -108,6 +111,7 @@ public class GameManager : MonoBehaviour
         mainCamera.orthographicSize = 0.5f;
         StartMovement();
         map.resetIcons();
+        
     }
 
     public IEnumerator AudioFade(AudioSource audioSource, float FadeTime , bool fadeIn)
@@ -131,14 +135,20 @@ public class GameManager : MonoBehaviour
             
             float startVolume = 0.01f;
 
-            while (audioSource.volume < 0.1f)
+            while (audioSource.volume < 0.25f)
             {
                 audioSource.volume += startVolume * Time.deltaTime / FadeTime;
                 yield return null;
             }
         }
     }
-    
-    
 
+    public float GetTimeToFinish()
+    {
+        return timeToFinish;
+    }
+    public void SetTimeToFinish(float toSet)
+    {
+        timeToFinish = toSet;
+    }
 }
