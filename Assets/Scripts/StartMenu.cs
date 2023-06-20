@@ -10,6 +10,7 @@ public class StartMenu : MonoBehaviour
     public GameObject soundToggle;
     public GameObject continueButton;
     public TMP_Text record;
+    public TMP_Text coins;
     public TMP_Text message;
     public LevelLoad levelLoader;
     private void Awake()
@@ -29,6 +30,7 @@ public class StartMenu : MonoBehaviour
     private void Start()
     {
         record.text = "RECORD: " + PlayerPrefs.GetInt("Record");
+        coins.text = "COINS: " + PlayerPrefs.GetInt("Coins");
         Screen.orientation = ScreenOrientation.LandscapeLeft;
     }
     public void StartButton()

@@ -8,6 +8,7 @@ public class CoinItem : Item
         int coins = PlayerPrefs.GetInt("Coins");
         coins++;
         PlayerPrefs.SetInt("Coins", coins);
-        SendMessageToCanvas("I AM RICH!");
+        int rand = Random.Range(0, 4);
+        SendMessageToCanvas(rand == 0 ? "I AM RICH!" : rand == 1 ? "MONEY MONEY!" : rand == 2 ? "BLING BLING!" : "MAKE IT RAIN!");
     }
 }

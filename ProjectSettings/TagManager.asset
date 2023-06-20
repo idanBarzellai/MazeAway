@@ -11,6 +11,7 @@ TagManager:
   - clock_item
   - coin_item
   - music
+  - map
   layers:
   - Default
   - TransparentFX

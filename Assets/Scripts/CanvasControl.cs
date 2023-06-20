@@ -120,11 +120,11 @@ public class CanvasControl : MonoBehaviour
         }
     }
 
-    public void VibrateDevice()
-    {
-        if(PlayerPrefs.GetInt("SoundToggle") == 1)
-            Handheld.Vibrate();
-    }
+    //public void VibrateDevice()
+    //{
+    //    if(PlayerPrefs.GetInt("SoundToggle") == 1)
+    //        Handheld.Vibrate();
+    //}
 
     public void PauseGame()
     {

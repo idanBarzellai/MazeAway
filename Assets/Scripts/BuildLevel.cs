@@ -124,7 +124,12 @@ public class BuildLevel : MonoBehaviour
         // Spawn items by current round, gets harder as the round gets bigger
         PickSpawnForPlayer(starts, gm.player.gameObject);
         PickSpawnForItems(keyItem);
-        PickSpawnForItems(coinItem);
+
+        for (int i = 0; i < 10; i++)
+        {
+            PickSpawnForItems(coinItem);
+        }
+
         if (gm.round < 5)
         {
             PickSpawnForItems(magnifingGlass);

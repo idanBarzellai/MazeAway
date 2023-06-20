@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
         canvas.GotKey(true);
         CancelInvoke("cameraResize");
         mainCamera.orthographicSize = 0.5f;
+        mainCamera.gameObject.GetComponent<Camera_Follow>().SetWaited(false); ;
         StartMovement();
         map.resetIcons();
         
