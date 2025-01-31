@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
         else if (Instance != this) // If there is already an instance and it's not `this` instance
             Destroy(gameObject); // Destroy the GameObject, this component is attached to
-        if (PlayerPrefs.GetInt("Round") < 1)
+        if (PlayerPrefs.GetInt("Round") == null || PlayerPrefs.GetInt("Round") < 1)
             round = 1;
         else
             round = PlayerPrefs.GetInt("Round");
@@ -42,12 +42,13 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.GetInt("SoundToggle") == 0)
         {
             AudioListener.volume = 0;
-            canvas.soundToggle.SetActive(true);
+            canvas.soundToggle.text = "mute";
+
         }
         else AudioListener.volume = 1;
         canvas.winScreen.SetActive(true);
-        
-        StartCoroutine(canvas.Countdown(3));  
+
+        StartCoroutine(canvas.Countdown(3));
     }
 
     public void WinLevel()
@@ -59,9 +60,9 @@ public class GameManager : MonoBehaviour
 
     public void LoseState()
     {
-        player.LostLevel();     
+        player.LostLevel();
         canvas.ShowLostScreen(round);
-        AudioLoopToLose(loseAudio);       
+        AudioLoopToLose(loseAudio);
     }
 
     public void AudioLoopToLose(AudioClip clip)
@@ -74,9 +75,9 @@ public class GameManager : MonoBehaviour
     public void StartMovement()
     {
         player.StartMovement();
-        AudioLoopToLose( gameLoopAudio);
+        AudioLoopToLose(gameLoopAudio);
         StartCoroutine(AudioFade(audio, 0.5f, true));
-    }   
+    }
 
     public void SetCurrTime(float newTime)
     {
@@ -88,7 +89,7 @@ public class GameManager : MonoBehaviour
     {
         magnifing = reqSize;
         InvokeRepeating("cameraResize", 0.1f, 0.1f);
-      
+
     }
 
     private void cameraResize()
@@ -112,14 +113,14 @@ public class GameManager : MonoBehaviour
         mainCamera.gameObject.GetComponent<Camera_Follow>().SetWaited(false); ;
         StartMovement();
         map.resetIcons();
-        
+
     }
 
-    public IEnumerator AudioFade(AudioSource audioSource, float FadeTime , bool fadeIn)
+    public IEnumerator AudioFade(AudioSource audioSource, float FadeTime, bool fadeIn)
     {
         if (!fadeIn)
         {
-            
+
             float startVolume = audioSource.volume;
 
             while (audioSource.volume > 0)
@@ -133,7 +134,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            
+
             float startVolume = 0.01f;
 
             while (audioSource.volume < 0.25f)

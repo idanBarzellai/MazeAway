@@ -17,7 +17,7 @@ public class CanvasControl : MonoBehaviour
     public GameObject loseScreen;
     public GameObject timerPanel;
     public GameObject menuPanel;
-    public GameObject soundToggle;
+    public TMP_Text soundToggle;
     public GameObject pauseMenu;
     public TMP_Text threeTwoOne;
     public TMP_Text message;
@@ -29,7 +29,7 @@ public class CanvasControl : MonoBehaviour
     public LevelLoad levelLoader;
 
     Color32 currColor;
-    bool tenSecs =false;
+    bool tenSecs = false;
     private GameManager gameManager;
 
     void Start()
@@ -82,7 +82,7 @@ public class CanvasControl : MonoBehaviour
 
     void FlashText()
     {
-        timerPanel.GetComponentInChildren<Image>().enabled = !timerPanel.GetComponentInChildren<Image>().enabled;  
+        timerPanel.GetComponentInChildren<Image>().enabled = !timerPanel.GetComponentInChildren<Image>().enabled;
     }
 
     public void ResetCanvas()
@@ -98,7 +98,7 @@ public class CanvasControl : MonoBehaviour
     public void ShowLostScreen(int round)
     {
         loseScreen.SetActive(true);
-        loseScreen.GetComponentInChildren<TMP_Text>().text = "YOU  SURVIVED  " + (round -1) + "  ROUNDS!";  
+        loseScreen.GetComponentInChildren<TMP_Text>().text = "YOU  SURVIVED  " + (round - 1) + "  ROUNDS!";
     }
 
     public void ShowWinScreen()
@@ -128,18 +128,18 @@ public class CanvasControl : MonoBehaviour
 
     public void PauseGame()
     {
-        if(Time.timeScale == 1)
+        if (Time.timeScale == 1)
             Time.timeScale = 0;
         else
             Time.timeScale = 1;
     }
 
     public IEnumerator Countdown(int count)
-    {  
-        if ( count == 5)
+    {
+        if (count == 5)
         {
             audio.Pause();
-            
+
             threeTwoOne.text = "YOU WON!";
             yield return new WaitForSecondsRealtime(1);
             count--;
@@ -149,13 +149,13 @@ public class CanvasControl : MonoBehaviour
             threeTwoOne.text = "NEXT MAZE";
             yield return new WaitForSecondsRealtime(1);
             count--;
-        }        
+        }
         while (count > 0 && count < 4)
         {
             if (count == 3)
                 threeTwoOneControl.PlayThreetwoOne();
 
-            threeTwoOne.text = "" +count;
+            threeTwoOne.text = "" + count;
             yield return new WaitForSecondsRealtime(1);
             count--;
         }
@@ -165,7 +165,7 @@ public class CanvasControl : MonoBehaviour
             yield return new WaitForSecondsRealtime(1);
         }
         audio.clip = tickTockAudio;
-        RetryGame();  
+        RetryGame();
     }
 
     public IEnumerator MessageOut(string msg)
@@ -191,7 +191,7 @@ public class CanvasControl : MonoBehaviour
     }
 
     public void RetryGame()
-    {  
+    {
         gameManager.RetryGame();
         timeToFinish = gameManager.GetTimeToFinish();
         if (Time.timeScale == 0)
@@ -203,15 +203,15 @@ public class CanvasControl : MonoBehaviour
         if (AudioListener.volume != 0)
         {
             AudioListener.volume = 0;
-            soundToggle.SetActive(true);
+            soundToggle.text = "mute";
             PlayerPrefs.SetInt("SoundToggle", 0);
         }
         else
         {
             AudioListener.volume = 1;
-            soundToggle.SetActive(false);
+            soundToggle.text = "sound";
             PlayerPrefs.SetInt("SoundToggle", 1);
-        }        
+        }
     }
 
     public void tenSecsOn()
@@ -222,13 +222,14 @@ public class CanvasControl : MonoBehaviour
     public void MainMenuButton()
     {
         PauseGame();
-        StartCoroutine(levelLoader.TransitionLoad("StartMenu"));      
-        pauseMenu.SetActive(false);  
+        StartCoroutine(levelLoader.TransitionLoad("StartMenu"));
+        pauseMenu.SetActive(false);
     }
 
     public void RetryButton()
     {
-        PauseGame();
+        if (Time.timeScale == 0)
+            PauseGame();
         pauseMenu.SetActive(false);
         PlayerPrefs.SetInt("Round", 1);
         StartCoroutine(levelLoader.TransitionLoad("Level1"));

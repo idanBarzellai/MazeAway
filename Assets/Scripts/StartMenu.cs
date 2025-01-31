@@ -7,28 +7,26 @@ using TMPro;
 public class StartMenu : MonoBehaviour
 {
     // Control the Menu scene
-    public GameObject soundToggle;
+    public TMP_Text soundToggle;
     public GameObject continueButton;
     public TMP_Text record;
     public TMP_Text coins;
     public TMP_Text message;
     public LevelLoad levelLoader;
-    private void Awake()
-    {
-        // Sets the game as the player left it
-        if (PlayerPrefs.GetInt("SoundToggle") == 0)
-        {
-            AudioListener.volume = 0;
-            soundToggle.SetActive(true);
-        }
-        else AudioListener.volume = 1;
-        if (PlayerPrefs.GetInt("Round") == 1)
-            continueButton.SetActive(false);
-        else continueButton.SetActive(true);
-    }
 
     private void Start()
     {
+        if (PlayerPrefs.GetInt("SoundToggle") == 0)
+        {
+            AudioListener.volume = 0;
+            soundToggle.text = "mute";
+        }
+        else AudioListener.volume = 1;
+
+        if (PlayerPrefs.GetInt("Round") == null || PlayerPrefs.GetInt("Round") <= 1)
+            continueButton.SetActive(false);
+        else continueButton.SetActive(true);
+
         record.text = "RECORD: " + PlayerPrefs.GetInt("Record");
         coins.text = "COINS: " + PlayerPrefs.GetInt("Coins");
         Screen.orientation = ScreenOrientation.LandscapeLeft;
@@ -45,13 +43,13 @@ public class StartMenu : MonoBehaviour
         if (AudioListener.volume != 0)
         {
             AudioListener.volume = 0;
-            soundToggle.SetActive(true);
+            soundToggle.text = "mute";
             PlayerPrefs.SetInt("SoundToggle", 0);
         }
         else
         {
             AudioListener.volume = 1;
-            soundToggle.SetActive(false);
+            soundToggle.text = "sound";
             PlayerPrefs.SetInt("SoundToggle", 1);
         }
     }
@@ -60,7 +58,7 @@ public class StartMenu : MonoBehaviour
     {
         StartCoroutine(AudioFade(GetComponent<AudioSource>(), 1f, false));
         StartCoroutine(levelLoader.TransitionLoad("Level1"));
-        
+
     }
     public void ShopButton()
     {
