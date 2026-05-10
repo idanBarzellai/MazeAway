@@ -23,7 +23,7 @@ public class StartMenu : MonoBehaviour
         }
         else AudioListener.volume = 1;
 
-        if (PlayerPrefs.GetInt("Round") == null || PlayerPrefs.GetInt("Round") <= 1)
+        if (PlayerPrefs.GetInt("Round") <= 1)
             continueButton.SetActive(false);
         else continueButton.SetActive(true);
 

@@ -4,7 +4,7 @@ public class Item : MonoBehaviour
 {
     // Class for all items to inherite
     protected Camera mainCamera;
-    protected Collider2D collider;
+    protected new Collider2D collider;
     protected SpriteRenderer sprite;
     protected GameManager gm;
     protected BlockContorller parentBlock;

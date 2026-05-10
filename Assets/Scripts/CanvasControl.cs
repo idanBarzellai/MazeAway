@@ -24,7 +24,7 @@ public class CanvasControl : MonoBehaviour
     public TMP_Text itemMessage;
     public Image keyImg;
     public AudioClip tickTockAudio;
-    private AudioSource audio;
+    private new AudioSource audio;
     private AudioController threeTwoOneControl;
     public LevelLoad levelLoader;
 
@@ -238,7 +238,7 @@ public class CanvasControl : MonoBehaviour
     public void PauseButton()
     {
         PauseGame();
-        pauseMenu.SetActive(!pauseMenu.active);
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
     }
 
     public void QuitButton()

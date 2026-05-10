@@ -7,7 +7,7 @@ public class MagnifyingGlass : Item
     protected override void Start()
     {
         base.Start();
-        player = FindObjectOfType<PlayerController>();
+        player = FindFirstObjectByType<PlayerController>();
     }
     public override void ItemPower()
     {

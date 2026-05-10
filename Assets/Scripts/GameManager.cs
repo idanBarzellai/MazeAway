@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public BuildLevel levelBuilder;
     public AudioClip gameLoopAudio;
     public AudioClip loseAudio;
-    public AudioSource audio;
+    public new AudioSource audio;
     public MapContorller map;
     public int round;
     public float currTime;
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
         else if (Instance != this) // If there is already an instance and it's not `this` instance
             Destroy(gameObject); // Destroy the GameObject, this component is attached to
-        if (PlayerPrefs.GetInt("Round") == null || PlayerPrefs.GetInt("Round") < 1)
+        if (PlayerPrefs.GetInt("Round") < 1)
             round = 1;
         else
             round = PlayerPrefs.GetInt("Round");

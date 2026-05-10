@@ -1,0 +1,5 @@
+# ninja log v5
+127	291	8001226250737806	C:/Users/Idan/Desktop/Projects/Old Projects/MazeAway/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/3h23143v/obj/x86_64/libswappywrapper.so	4bb1eeb2147df5b3
+1	125	8001226249190223	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	b67670c7be17b376
+1	90	8001229747769363	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	b67670c7be17b376
+90	184	8001229748614501	C:/Users/Idan/Desktop/Projects/Old Projects/MazeAway/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/3h23143v/obj/x86_64/libswappywrapper.so	4bb1eeb2147df5b3
